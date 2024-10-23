@@ -1,0 +1,41 @@
+/* Light blue background for the page */
+.signup-page {
+  background-color: #e0f7fa; /* Light blue background */
+  height: 100vh; /* Ensure it covers the full viewport height */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 40px;
+}
+
+/* Form styling */
+.form-container {
+  background-color: white; /* White background for form */
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+}
+
+/* Make the text fields wider */
+.small-textfield {
+  width: 100%;
+  padding: 10px;
+  font-size: 16px;
+}
+
+/* Responsive image adjustments */
+.registration-img {
+  max-width: 100%;
+  height: auto;
+}
+
+/* Full height and vertical centering for the form and image */
+.vh-100 {
+  height: 100vh;
+}
+
+@media (max-width: 768px) {
+  .form-container {
+    width: 100%;
+  }
+}

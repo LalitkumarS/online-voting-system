@@ -1,0 +1,29 @@
+/* src/Home.css */
+
+/* Styling the home container */
+.home-container {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background-color: rgba(240, 248, 255, 0.8); /* Light blue color with transparency */
+  position: relative; /* Needed for the z-index stacking context */
+}
+
+/* Navbar styling */
+.navbar {
+  position: relative;
+  z-index: 10;
+}
+
+/* Background image settings */
+.background-image {
+  background-image: url('election.jpg'); /* Use your correct image path */
+  background-size: cover;
+  background-position: center;
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 1;
+}
