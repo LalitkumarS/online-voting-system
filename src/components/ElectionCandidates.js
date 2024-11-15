@@ -1,26 +1,33 @@
 import React from 'react';
-import modiPhoto from '../assets/modi.jpg';  // Adjust the path to your image directory
+import { useNavigate, useLocation } from 'react-router-dom';  // Import useNavigate for navigation
+import modiPhoto from '../assets/modi.jpg';  
 import akhileshPhoto from '../assets/akhilesh.jpeg';
 import rahulPhoto from '../assets/rahul.jpeg'; 
 import mamtaPhoto from '../assets/mamta.jpeg'; 
 import arvindPhoto from '../assets/arvind.jpeg'; 
-import mayawatiPhoto from '../assets/mayawati.jpeg'; // Adjust the path
+import mayawatiPhoto from '../assets/mayawati.jpeg';
+import './ElectionCandidates.css';
 
 const ElectionCandidates = () => {
+  const navigate = useNavigate();  
+  const location = useLocation();  
+  const { email, voterId } = location.state || {};  // Extract email and voterId from location state passed from UpcomingElections
+
+
   const candidates = [
     {
       id: 1,
       name: 'Narendra Modi',
       party: 'Bharatiya Janata Party (BJP)',
       symbol: '🌸',
-      photo: modiPhoto,  // Use imported image
+      photo: modiPhoto,
     },
     {
       id: 2,
       name: 'Rahul Gandhi',
       party: 'Indian National Congress (INC)',
       symbol: '✋',
-      photo: rahulPhoto,  // External URL for online images
+      photo: rahulPhoto,
     },
     {
       id: 3,
@@ -34,7 +41,7 @@ const ElectionCandidates = () => {
       name: 'Akhilesh Yadav',
       party: 'Samajwadi Party',
       symbol: '🚲',
-      photo: akhileshPhoto,  // Use imported image
+      photo: akhileshPhoto,
     },
     {
       id: 5,
@@ -52,26 +59,36 @@ const ElectionCandidates = () => {
     },
   ];
 
+  const handleVoteClick = (candidate) => {
+    navigate('/confirm-vote', { state: {email, selectedCandidate: candidate, voterId }});
+  };
+
   return (
-    <div className="container mt-5">
-      <h1 className="text-center mb-4">Candidates for Election</h1>
-      <div className="row justify-content-center">
+    <div className="election-container">
+      <h1 className="election-header">Candidates for Election</h1>
+      <div className="candidate-cards">
         {candidates.map((candidate) => (
-          <div className="col-md-4 col-sm-6 mb-4" key={candidate.id}>
-            <div className="card h-100 text-center shadow">
-              <img
-                src={candidate.photo}
-                className="card-img-top mx-auto img-fluid"
-                style={{ width: '150px', height: '150px', objectFit: 'contain' }}
-                alt={candidate.name}
-              />
-              <div className="card-body">
-                <h5 className="card-title">{candidate.name}</h5>
-                <p className="card-text">Party: {candidate.party}</p>
-                <p className="card-text">
-                  Symbol: <span className="text-lg">{candidate.symbol}</span>
+          <div className="candidate-card" key={candidate.id}>
+            <div className="card-inner">
+              <div className="card-front">
+                <img
+                  src={candidate.photo}
+                  className="candidate-photo"
+                  alt={candidate.name}
+                />
+                <h5 className="candidate-name">{candidate.name}</h5>
+                <p className="candidate-party">{candidate.party}</p>
+              </div>
+              <div className="card-back">
+                <p className="candidate-symbol">
+                  Symbol: <span>{candidate.symbol}</span>
                 </p>
-                <button className="btn btn-success mt-2">Vote</button>
+                <button
+                  className="vote-button"
+                  onClick={() => handleVoteClick(candidate)}
+                >
+                  Vote
+                </button>
               </div>
             </div>
           </div>
@@ -82,3 +99,4 @@ const ElectionCandidates = () => {
 };
 
 export default ElectionCandidates;
+    

@@ -1,0 +1,102 @@
+/* Centering the confirmation card */
+.confirmation-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh; /* Full viewport height */
+    background-color: #f3f4f6; /* Light gray background */
+    padding: 1rem;
+  }
+  
+  /* Card styling for ConfirmVote */
+  .confirmation-card {
+    background-color: #ffffff;
+    padding: 2rem;
+    border-radius: 1rem;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    max-width: 400px;
+    width: 100%;
+    text-align: center;
+    transition: transform 0.3s ease;
+  }
+  
+  .confirmation-card:hover {
+    transform: scale(1.02);
+  }
+  
+  /* Candidate image styling */
+  .candidate-photo {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    margin: 1rem auto;
+    object-fit: cover;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.15);
+  }
+  
+  /* Candidate and party details */
+  .candidate-name {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: #1e3a8a;
+    margin-top: 0.5rem;
+  }
+  
+  .candidate-party {
+    font-size: 1rem;
+    color: #4b5563;
+  }
+  
+  .vote-symbol {
+    font-size: 2rem;
+    color: #10b981;
+  }
+  
+  /* Confirm vote button */
+  .confirm-button {
+    width: 100%;
+    padding: 0.75rem;
+    font-size: 1.125rem;
+    font-weight: 600;
+    color: #ffffff;
+    background-color: #2563eb;
+    border: none;
+    border-radius: 0.5rem;
+    margin-top: 1.5rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .confirm-button:hover {
+    background-color: #1d4ed8;
+  }
+  
+  /* Success message styling */
+  .vote-success-message {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #10b981;
+    font-size: 1rem;
+    font-weight: 600;
+    margin-top: 1rem;
+  }
+  
+  .success-icon {
+    width: 18px; /* Smaller size */
+    height: 18px;
+    color: #10b981;
+    margin-left: 0.3rem;
+  }
+  
+  @media (max-width: 576px) {
+    .confirmation-card {
+      padding: 1.5rem;
+      max-width: 90%;
+    }
+  
+    .confirm-button {
+      font-size: 1rem;
+    }
+  }
+  

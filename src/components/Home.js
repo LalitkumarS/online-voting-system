@@ -30,10 +30,12 @@ const Home = () => {
       </nav>
 
       <div className="background-image">
-        {/* This is where the background image will display */}
-      </div>
+  <div className='bg-name'>Welcome Page</div>
+</div>
+
     </div>
   );
 };
 
 export default Home;
+

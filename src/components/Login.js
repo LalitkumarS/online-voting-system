@@ -1,60 +1,88 @@
-import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import './App.css';
-import loginImage from './signin.png';
+import React, { useState, useEffect } from 'react';
+import { useNavigate, useLocation } from 'react-router-dom';
+import axios from 'axios';
+import './Login.css';
 
 const Login = () => {
   const [formData, setFormData] = useState({ email: '', password: '' });
+  const location = useLocation();
+  // const voterId = location.state?.voterId;
   const navigate = useNavigate();
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
-
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    navigate('/upcoming-elections');
+  
+    try {
+      // Fetch voter ID based on email
+      const response = await fetch(`http://localhost:5000/api/registrations?email=${formData.email}`);
+      const data = await response.json();
+      
+      if (data && data.voterId) {
+        // Store voterId in local storage and update formData with it
+        localStorage.setItem("vid", data.voterId);
+        localStorage.setItem("name", data.firstName);
+        formData.voterId = data.voterId;
+        formData.firstName = data.firstName;
+      } else {
+        console.error('Voter ID not found for this email');
+        return;
+      }
+  
+    } catch (error) {
+      console.error('Error fetching voter ID:', error);
+      return;
+    }
+  
+    try {
+      // Send login data to server
+      await axios.post('http://localhost:5000/api/login', formData);
+  
+      // Navigate with the voterId and email
+      navigate('/upcoming-elections', { state: { email: formData.email, voterId: formData.voterId ,firstName: formData.firstName} });
+    } catch (error) {
+      console.error('Error saving login data:', error);
+    }
   };
-
+  
   return (
-    <div className="login-background">
-      <div className="row justify-content-center align-items-center w-100">
-        <div className="col-md-6 d-flex justify-content-center align-items-center">
-          <img src={loginImage} alt="Login" className="img-fluid" />
+    <div className="login-page">
+      <div className="login-container">
+        <div className="login-image">
+          <img src="/signin.png" alt="Login" />
         </div>
-        <div className="col-md-6">
-          <div className="login-wrapper">
-            <div className="form-container">
-              <h2 className="text-center mb-4">Login</h2>
-              <form onSubmit={handleSubmit}>
-                <div className="mb-3">
-                  <label htmlFor="email" className="form-label">Email</label>
-                  <input
-                    type="email"
-                    className="form-control short-input"
-                    id="email"
-                    name="email"
-                    value={formData.email}
-                    onChange={handleChange}
-                    required
-                  />
-                </div>
-                <div className="mb-3">
-                  <label htmlFor="password" className="form-label">Password</label>
-                  <input
-                    type="password"
-                    className="form-control short-input"
-                    id="password"
-                    name="password"
-                    value={formData.password}
-                    onChange={handleChange}
-                    required
-                  />
-                </div>
-                <button type="submit" className="btn btn-primary w-100">Login</button>
-              </form>
+        <div className="login-form">
+          <h2>Welcome Back</h2>
+          <p>Please log in to continue</p>
+          <form onSubmit={handleSubmit}>
+            <div className="form-group">
+              <label htmlFor="email">Email</label>
+              <input
+                type="email"
+                id="email"
+                name="email"
+                value={formData.email}
+                onChange={handleChange}
+                required
+                placeholder="Enter your email"
+              />
             </div>
-          </div>
+            <div className="form-group">
+              <label htmlFor="password">Password</label>
+              <input
+                type="password"
+                id="password"
+                name="password"
+                value={formData.password}
+                onChange={handleChange}
+                required
+                placeholder="Enter your password"
+              />
+            </div>
+            <button type="submit">Login</button>
+          </form>
         </div>
       </div>
     </div>

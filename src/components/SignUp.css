@@ -1,11 +1,14 @@
 /* Light blue background for the page */
 .signup-page {
   background-color: #e0f7fa; /* Light blue background */
-  height: 100vh; /* Ensure it covers the full viewport height */
+  height: 100%; /* Ensure it covers the full viewport height */
   display: flex;
-  justify-content: center;
+  justify-content:space-between;
   align-items: center;
   padding: 40px;
+  margin-top:-100px;
+  flex-direction: row;
+
 }
 
 /* Form styling */
@@ -13,6 +16,8 @@
   background-color: white; /* White background for form */
   padding: 20px;
   border-radius: 10px;
+  width:40vw;
+  margin-left: -200px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow */
 }
 
@@ -25,8 +30,11 @@
 
 /* Responsive image adjustments */
 .registration-img {
-  max-width: 100%;
-  height: auto;
+  width: 500px;
+  height:600px ;
+  margin-top: 100px;
+  background-clip: border-box;
+  mix-blend-mode: multiply;
 }
 
 /* Full height and vertical centering for the form and image */
